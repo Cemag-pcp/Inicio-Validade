@@ -238,7 +238,13 @@ for i in range(len(tabela2)):
         nav.find_element(By.XPATH,'//*[@id="'+ str(contagem) +'"]/td[2]/div/div').click()
         time.sleep(2)
         nav.find_element(By.XPATH,'//*[@id="'+ str(contagem) +'"]/td[2]/div/input').send_keys(Keys.CONTROL + 'm')
-        time.sleep(7)
+        time.sleep(1)
+        try:    
+            while nav.find_element(By.XPATH,'//*[@id="'+ str(contagem) +'"]/td[2]/div/input'):
+                print('Carregando...')
+        except:
+            print('Carregou 1')
+        time.sleep(1.5)
 
         #FIM
         # WebDriverWait(nav,20).until(EC.presence_of_element_located((By.XPATH,'/html/body/table/tbody/tr[2]/td/div/form/table/tbody/tr[1]/td[1]/table/tbody/tr[15]/td/table/tbody/tr/td[1]/table/tbody/tr/td[1]/div/table/tbody/tr[1]/td[1]/table/tbody/tr[15]/td/table/tbody/tr/td[1]/table/tbody/tr/td[1]/div/table/thead/tr[2]/td[1]/table/tbody/tr/td[1]/table/tbody/tr/td[1]/div')))
@@ -256,3 +262,4 @@ WebDriverWait(nav,20).until(EC.presence_of_element_located((By.XPATH,'/html/body
 time.sleep(1)
 nav.find_element(By.XPATH,'/html/body/table/tbody/tr[2]/td/div/form/table/thead/tr[3]/td[1]/table/tbody/tr[1]/td[1]').click()
 time.sleep(2)
+# nav.close()
