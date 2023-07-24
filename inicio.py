@@ -91,7 +91,7 @@ lista_menu, test_list = listar(nav, 'webguiTreeNodeLabel')
 time.sleep(1)
 click_producao = test_list.loc[test_list[0] == 'Materiais e Produtos'].reset_index(drop=True)['index'][0]
 lista_menu[click_producao].click()
-time.sleep(6)
+time.sleep(8)
 
 iframes(nav)
 WebDriverWait(nav,20).until(EC.presence_of_element_located((By.XPATH, '/html/body/table/tbody/tr[2]/td/div/form/table/thead/tr[2]/td[1]/table/tbody/tr/td[1]/table/tbody/tr/td[1]/div')))
@@ -188,7 +188,6 @@ for i in range(len(tabela2)):
         tabela_obs = tabela3[11]
         tabela_qtd = tabela3[14]
         tabela_deposito = tabela3[17]
-
 # --------------------------------------------------------- Tratamento tabelas -------------------------------------------------------------
 
         WebDriverWait(nav,20).until(EC.presence_of_element_located((By.XPATH,'//*[@id="'+ str(contagem) +'"]/td[2]/div/input')))
@@ -246,20 +245,8 @@ for i in range(len(tabela2)):
             print('Carregou 1')
         time.sleep(1.5)
 
-        #FIM
-        # WebDriverWait(nav,20).until(EC.presence_of_element_located((By.XPATH,'/html/body/table/tbody/tr[2]/td/div/form/table/tbody/tr[1]/td[1]/table/tbody/tr[15]/td/table/tbody/tr/td[1]/table/tbody/tr/td[1]/div/table/tbody/tr[1]/td[1]/table/tbody/tr[15]/td/table/tbody/tr/td[1]/table/tbody/tr/td[1]/div/table/thead/tr[2]/td[1]/table/tbody/tr/td[1]/table/tbody/tr/td[1]/div')))
-        # time.sleep(1)
-        # nav.find_element(By.XPATH,'/html/body/table/tbody/tr[2]/td/div/form/table/tbody/tr[1]/td[1]/table/tbody/tr[15]/td/table/tbody/tr/td[1]/table/tbody/tr/td[1]/div/table/tbody/tr[1]/td[1]/table/tbody/tr[15]/td/table/tbody/tr/td[1]/table/tbody/tr/td[1]/div/table/thead/tr[2]/td[1]/table/tbody/tr/td[1]/table/tbody/tr/td[1]/div').click()
-        # time.sleep(1.5)
-
-        # input_localizar_recursos = nav.find_element(By.XPATH, '/html/body/table/tbody/tr[2]/td/div/form/table/tbody/tr[1]/td[1]/table/tbody/tr[15]/td/table/tbody/tr/td[1]/table/tbody/tr/td[1]/div/table/tbody/tr[1]/td[1]/table/tbody/tr[15]/td/table/tbody/tr/td[1]/table/tbody/tr/td[1]/div/table/thead/tr[3]/td[1]/table/tbody/tr[1]/td[3]/input')
-        # time.sleep(1.5)
-        # input_localizar_recursos.send_keys(Keys.CONTROL + 'a')
-        # time.sleep(1.5)
-        # input_localizar_recursos.send_keys(Keys.BACKSPACE)
-        # time.sleep(1.5)
 WebDriverWait(nav,20).until(EC.presence_of_element_located((By.XPATH,'/html/body/table/tbody/tr[2]/td/div/form/table/thead/tr[3]/td[1]/table/tbody/tr[1]/td[1]')))
 time.sleep(1)
 nav.find_element(By.XPATH,'/html/body/table/tbody/tr[2]/td/div/form/table/thead/tr[3]/td[1]/table/tbody/tr[1]/td[1]').click()
 time.sleep(2)
-# nav.close()
+nav.close()
