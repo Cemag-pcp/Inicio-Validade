@@ -102,8 +102,8 @@ input_localizar = nav.find_element(By.ID, 'grInputSearch_explorer')
 time.sleep(1.5)
 
 tabela2 = tabela.copy()
-tabela2 = tabela2.rename(columns={0: 'Código'})
-tabela2 = tabela2[tabela2['Código'].notnull() & (tabela2['Código'] != '')]
+tabela2 = tabela2.rename(columns={0: 'Código', 1:'Status'})
+tabela2 = tabela2[tabela2['Código'].notnull() & (tabela2['Código'] != '') & (tabela2['Status'] == '')]
 tabela2 = tabela2['Código']
 tabela2 = tabela2[2:]
 # Resetar o índice
@@ -122,8 +122,7 @@ time.sleep(1)
 nav.find_element(By.XPATH, '/html/body/table/tbody/tr[2]/td/div/form/table/thead/tr[1]/td[1]/table/tbody/tr/td[2]/table/tbody/tr/td[1]/div').click()
 time.sleep(1.5)
 
-
-for i in range(len(tabela2)):
+for i in range(1,len(tabela2)):
     
     if tabela2[i] != '' or tabela2[i] != None:
         time.sleep(1)
@@ -186,6 +185,10 @@ for i in range(len(tabela2)):
         tabela_ordem = tabela3[5]
         tabela_inicio = tabela3[8]
         tabela_obs = tabela3[11]
+        
+        if not tabela_obs:
+            tabela_obs = ''
+            
         tabela_qtd = tabela3[14]
         tabela_deposito = tabela3[17]
 # --------------------------------------------------------- Tratamento tabelas -------------------------------------------------------------
@@ -244,6 +247,9 @@ for i in range(len(tabela2)):
         except:
             print('Carregou 1')
         time.sleep(1.5)
+
+    wks1.update('B' + str(i+3), 'Ok')
+
 
 WebDriverWait(nav,20).until(EC.presence_of_element_located((By.XPATH,'/html/body/table/tbody/tr[2]/td/div/form/table/thead/tr[3]/td[1]/table/tbody/tr[1]/td[1]')))
 time.sleep(1)
