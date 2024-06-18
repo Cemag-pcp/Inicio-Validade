@@ -23,9 +23,9 @@ while True:
         scope = ['https://www.googleapis.com/auth/spreadsheets',
             "https://www.googleapis.com/auth/drive"]
 
-        credentials = ServiceAccountCredentials.from_json_keyfile_name("service_account.json", scope)
+        credentials = ServiceAccountCredentials.from_json_keyfile_name("service_account_cemag.json", scope)
         client = gspread.authorize(credentials)
-        filename = 'service_account.json'
+        filename = 'service_account_cemag.json'
         sa = gspread.service_account(filename)
 
         sheet = 'Planilha de Início/Fim de Validade'
