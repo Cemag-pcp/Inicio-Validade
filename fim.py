@@ -13,6 +13,7 @@ import os
 import glob
 import chromedriver_autoinstaller
 import datetime
+from utils import *
 
 while True:
     try:
@@ -68,7 +69,11 @@ while True:
             return(lista_menu, test_lista)
 
 
-        nav = webdriver.Chrome()
+        try:
+            nav = webdriver.Chrome(r"C:\Users\pcp2\robo-saldo\chromedriver_extracted\chromedriver-win32\chromedriver.exe")
+        except:
+            chrome_driver_path = verificar_chrome_driver()
+            nav = webdriver.Chrome()
         time.sleep(1)
         nav.maximize_window()
         time.sleep(1)

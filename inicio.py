@@ -14,7 +14,7 @@ import glob
 import chromedriver_autoinstaller
 import datetime
 #https://googlechromelabs.github.io/chrome-for-testing/known-good-versions.json
-
+from utils import *
 
 while True:
     
@@ -70,15 +70,20 @@ while True:
 
             return(lista_menu, test_lista)
 
-        nav = webdriver.Chrome()
+        try:
+            nav = webdriver.Chrome(r"C:\Users\pcp2\robo-saldo\chromedriver_extracted\chromedriver-win32\chromedriver.exe")
+        except:
+            chrome_driver_path = verificar_chrome_driver()
+            nav = webdriver.Chrome()
+
         time.sleep(1)
         nav.maximize_window()
         time.sleep(1)
-        nav.get('http://127.0.0.1/sistema') # nav.get('https://hcemag.innovaro.com.br/sistema')
+        nav.get('https://hcemag.innovaro.com.br/sistema') # nav.get('https://hcemag.innovaro.com.br/sistema')
 
-        nav.find_element(By.ID, 'username').send_keys('joao marcos') #ti.dev 'ti.prod'
+        nav.find_element(By.ID, 'username').send_keys('ti.dev') #ti.dev 'ti.prod'
         time.sleep(2)
-        nav.find_element(By.ID, 'password').send_keys('280470') # 'Cem@@1600'
+        nav.find_element(By.ID, 'password').send_keys('cem@1616') # 'cem@1616' 'Cem@@1600'
         time.sleep(1)
         nav.find_element(By.ID, 'submit-login').click() 
         WebDriverWait(nav,20).until(EC.presence_of_element_located((By.ID, 'bt_1892603865')))
