@@ -15,6 +15,7 @@ import chromedriver_autoinstaller
 import datetime
 #https://googlechromelabs.github.io/chrome-for-testing/known-good-versions.json
 from utils import *
+from io import StringIO
 
 while True:
     
@@ -175,7 +176,7 @@ while True:
 
                 table_html = table.get_attribute('outerHTML')
 
-                df = pd.read_html(str(table_html))
+                df = pd.read_html(StringIO(table_html))
                 
                 df1 = df.copy()
 
@@ -275,7 +276,7 @@ while True:
                     print('Carregou 1')
                 time.sleep(1.5)
 
-            wks1.update('I' + str(linha+1), 'Ok')
+            wks1.update('I' + str(linha+1), [['Ok']])
 
 
         WebDriverWait(nav,20).until(EC.presence_of_element_located((By.XPATH,'/html/body/table/tbody/tr[2]/td/div/form/table/thead/tr[3]/td[1]/table/tbody/tr[1]/td[1]')))
