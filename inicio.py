@@ -273,6 +273,9 @@ while True:
                 try:    
                     while nav.find_element(By.XPATH,'//*[@id="'+ str(contagem) +'"]/td[2]/div/input'):
                         print('Carregando...')
+                        time.sleep(2)
+                        nav.find_element(By.XPATH,'//*[@id="'+ str(contagem) +'"]/td[2]/div/input').send_keys(Keys.CONTROL + 'm')
+                        time.sleep(1)
                 except:
                     print('Carregou 1')
                 time.sleep(1.5)
