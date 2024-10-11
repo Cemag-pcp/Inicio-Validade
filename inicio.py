@@ -80,11 +80,11 @@ while True:
         time.sleep(1)
         nav.maximize_window()
         time.sleep(1)
-        nav.get('https://hcemag.innovaro.com.br/sistema') # nav.get('https://hcemag.innovaro.com.br/sistema')
+        nav.get('http://192.168.3.141/sistema') # nav.get('https://hcemag.innovaro.com.br/sistema')
 
-        nav.find_element(By.ID, 'username').send_keys('ti.dev') #ti.dev 'ti.prod'
+        nav.find_element(By.ID, 'username').send_keys('joao marcos') #ti.dev 'ti.prod'
         time.sleep(2)
-        nav.find_element(By.ID, 'password').send_keys('cem@1616') # 'cem@1616' 'Cem@@1600'
+        nav.find_element(By.ID, 'password').send_keys('201087') # 'cem@1616' 'Cem@@1600'
         time.sleep(1)
         nav.find_element(By.ID, 'submit-login').click() 
         WebDriverWait(nav,20).until(EC.presence_of_element_located((By.ID, 'bt_1892603865')))
@@ -269,18 +269,22 @@ while True:
                 nav.find_element(By.XPATH,'//*[@id="'+ str(contagem) +'"]/td[2]/div/div').click()
                 time.sleep(2)
                 nav.find_element(By.XPATH,'//*[@id="'+ str(contagem) +'"]/td[2]/div/input').send_keys(Keys.CONTROL + 'm')
+                time.sleep(3)
+                try:
+                    nav.find_element(By.XPATH,'//*[@id="'+ str(contagem) +'"]/td[2]/div/input').send_keys(Keys.CONTROL + 'm')
+                except:
+                    pass
                 time.sleep(1)
                 try:    
                     while nav.find_element(By.XPATH,'//*[@id="'+ str(contagem) +'"]/td[2]/div/input'):
                         print('Carregando...')
-                        time.sleep(2)
-                        nav.find_element(By.XPATH,'//*[@id="'+ str(contagem) +'"]/td[2]/div/input').send_keys(Keys.CONTROL + 'm')
-                        time.sleep(1)
                 except:
                     print('Carregou 1')
                 time.sleep(1.5)
-
+            
+            print(wks1)
             wks1.update('I' + str(linha+1), [['Ok']])
+            print('Ok')
 
 
         WebDriverWait(nav,20).until(EC.presence_of_element_located((By.XPATH,'/html/body/table/tbody/tr[2]/td/div/form/table/thead/tr[3]/td[1]/table/tbody/tr[1]/td[1]')))
