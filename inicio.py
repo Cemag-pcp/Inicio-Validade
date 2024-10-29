@@ -268,21 +268,11 @@ while True:
                 time.sleep(1)
                 nav.find_element(By.XPATH,'//*[@id="'+ str(contagem) +'"]/td[2]/div/div').click()
                 time.sleep(2)
-                nav.find_element(By.XPATH,'//*[@id="'+ str(contagem) +'"]/td[2]/div/input').send_keys(Keys.CONTROL + 'm')
-                time.sleep(3)
-                try:
-                    nav.find_element(By.XPATH,'//*[@id="'+ str(contagem) +'"]/td[2]/div/input').send_keys(Keys.CONTROL + 'm')
-                except:
-                    pass
+                WebDriverWait(nav,20).until(EC.presence_of_element_located((By.XPATH,'//*[@id="'+ str(contagem) +'"]/td[2]/div/input')))
                 time.sleep(1)
-                try:    
-                    while nav.find_element(By.XPATH,'//*[@id="'+ str(contagem) +'"]/td[2]/div/input'):
-                        print('Carregando...')
-                except:
-                    print('Carregou 1')
-                time.sleep(1.5)
+                nav.find_element(By.XPATH,'//*[@id="'+ str(contagem) +'"]/td[2]/div/input').send_keys(Keys.CONTROL + 'm')
+                time.sleep(6)
             
-            print(wks1)
             wks1.update('I' + str(linha+1), [['Ok']])
             print('Ok')
 
