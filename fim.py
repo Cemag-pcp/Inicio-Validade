@@ -86,7 +86,7 @@ while True:
 
         nav.find_element(By.ID, 'username').send_keys('joao marcos') #ti.dev
         time.sleep(2)
-        nav.find_element(By.ID, 'password').send_keys('280470')
+        nav.find_element(By.ID, 'password').send_keys('201087')
         time.sleep(1)
         nav.find_element(By.ID, 'submit-login').click() 
 
