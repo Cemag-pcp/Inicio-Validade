@@ -9,9 +9,9 @@ import numpy as np
 from datetime import datetime
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+from selenium.webdriver.chrome.service import Service
 import os
 import glob
-import chromedriver_autoinstaller
 import datetime
 from utils import *
 
@@ -69,15 +69,19 @@ while True:
             return(lista_menu, test_lista)
 
 
-        try:
-            nav = webdriver.Chrome(r"C:\Users\pcp2\robo-saldo\chromedriver_extracted\chromedriver-win32\chromedriver.exe")
-        except:
+        try: 
+            service = Service()
+            nav = webdriver.Chrome(service=service)
+        except Exception as e:
             chrome_driver_path = verificar_chrome_driver()
-            nav = webdriver.Chrome()
+            service = Service(executable_path=chrome_driver_path)
+            nav = webdriver.Chrome(service=service)
+
         time.sleep(1)
         nav.maximize_window()
         time.sleep(1)
-        nav.get('http://127.0.0.1/sistema')
+        nav.get('http://192.168.3.141/sistema') 
+        # nav.get('https://hcemag.innovaro.com.br/sistema')
 
 
         nav.find_element(By.ID, 'username').send_keys('joao marcos') #ti.dev
