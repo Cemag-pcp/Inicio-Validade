@@ -6,7 +6,7 @@ set "EXIT_CODE=0"
 set "PROJECT_DIR=%~dp0"
 if "%PROJECT_DIR:~-1%"=="\" set "PROJECT_DIR=%PROJECT_DIR:~0,-1%"
 
-set "APP_DIR=%PROJECT_DIR%\Inicio-Validade"
+set "APP_DIR=%PROJECT_DIR%"
 set "VENV_DIR=%PROJECT_DIR%\venv"
 set "VENV_PYTHON=%VENV_DIR%\Scripts\python.exe"
 set "REQUIREMENTS_FILE=%PROJECT_DIR%\requirements.txt"
