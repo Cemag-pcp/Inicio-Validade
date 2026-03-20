@@ -13,21 +13,27 @@ from selenium.webdriver.chrome.service import Service
 import os
 import glob
 import datetime
+from pathlib import Path
 #https://googlechromelabs.github.io/chrome-for-testing/known-good-versions.json
 from utils import *
 from io import StringIO
+import traceback
+
+BASE_DIR = Path(__file__).resolve().parent
+SERVICE_ACCOUNT_FILE = BASE_DIR / "service_account_cemag.json"
+SYSTEM_PASSWORD = os.getenv("SISTEMA_PASSWORD") or "201087"
 
 while True:
+    nav = None
     
     try:
 
         scope = ['https://www.googleapis.com/auth/spreadsheets',
             "https://www.googleapis.com/auth/drive"]
 
-        credentials = ServiceAccountCredentials.from_json_keyfile_name("service_account_cemag.json", scope)
+        credentials = ServiceAccountCredentials.from_json_keyfile_name(str(SERVICE_ACCOUNT_FILE), scope)
         client = gspread.authorize(credentials)
-        filename = 'service_account_cemag.json'
-        sa = gspread.service_account(filename)
+        sa = gspread.service_account(filename=str(SERVICE_ACCOUNT_FILE))
 
         sheet = 'Planilha de Início/Fim de Validade'
         #worksheet= input('Nome da aba:')
@@ -87,7 +93,7 @@ while True:
 
         nav.find_element(By.ID, 'username').send_keys('joao marcos') #ti.dev 'ti.prod'
         time.sleep(2)
-        nav.find_element(By.ID, 'password').send_keys('201087') # 'cem@1616' 'Cem@@1600'
+        nav.find_element(By.ID, 'password').send_keys(SYSTEM_PASSWORD) # 'cem@1616' 'Cem@@1600'
         time.sleep(1)
         nav.find_element(By.ID, 'submit-login').click() 
         WebDriverWait(nav,20).until(EC.presence_of_element_located((By.ID, 'bt_1892603865')))
@@ -287,6 +293,9 @@ while True:
         nav.close()
         break
 
-    except:
-        nav.close()
+    except Exception:
+        if nav is not None:
+            nav.close()
+        traceback.print_exc()
+        break
     
