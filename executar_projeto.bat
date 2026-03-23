@@ -28,31 +28,31 @@ if errorlevel 1 (
     )
 )
 
-if exist "%VENV_PYTHON%" goto run_menu
-
-echo Ambiente virtual nao encontrado. Criando venv...
-where py >nul 2>nul
-if not errorlevel 1 (
-    py -3.12 -m venv "%VENV_DIR%" >nul 2>nul
-)
-
 if not exist "%VENV_PYTHON%" (
-    where python >nul 2>nul
-    if errorlevel 1 (
-        echo Python nao encontrado no PATH.
+    echo Ambiente virtual nao encontrado. Criando venv...
+    where py >nul 2>nul
+    if not errorlevel 1 (
+        py -3.12 -m venv "%VENV_DIR%" >nul 2>nul
+    )
+
+    if not exist "%VENV_PYTHON%" (
+        where python >nul 2>nul
+        if errorlevel 1 (
+            echo Python nao encontrado no PATH.
+            set "EXIT_CODE=1"
+            goto end
+        )
+        python -m venv "%VENV_DIR%"
+    )
+
+    if not exist "%VENV_PYTHON%" (
+        echo Nao foi possivel criar o ambiente virtual.
         set "EXIT_CODE=1"
         goto end
     )
-    python -m venv "%VENV_DIR%"
 )
 
-if not exist "%VENV_PYTHON%" (
-    echo Nao foi possivel criar o ambiente virtual.
-    set "EXIT_CODE=1"
-    goto end
-)
-
-echo Instalando bibliotecas...
+echo Instalando/atualizando bibliotecas...
 "%VENV_PYTHON%" -m pip install --upgrade pip
 if errorlevel 1 (
     echo Falha ao atualizar o pip.
